@@ -13,6 +13,66 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/*
+Laravel tien un método estático para cada acción HTTP: get, post, put, patch, delete, options
+*/
+
+//Ruta más simple
+Route::get("test", function(){
+    echo "<h1>Ruta de prueba</h1>";
+});
+
+/*
++ Catálogo
++ Detalle de un libro
++ Alta de un préstamo
++ Registro de libro
++ Mis préstamos
+*/
+
+//Ruta simple
+Route::get("/", function(){
+
+    $books = [
+        "1" => [
+            "title" => "Viaje al Centro de la Tierra",
+            "author" => "Julio Verne"
+        ],
+        "2" => [
+            "title" => "El Faro del Fin del Mundo",
+            "author" => "Julio Verne"
+        ],
+        "3" => [
+            "title" => "El Conde de Montecristo",
+            "author" => "Alexander Dumas"
+        ]
+    ];
+
+    return view("booksList", ["booksList" => $books, "param2" => "hola"]);
+});
+
+//Método abreviado para rutas que devuelven vistas estáticas
+Route::view('laravel-landing', "welcome");
+
+//Paso de parámetros en rutas
+Route::get("book/{id?}", function($bookId = 1){
+
+    $books = [
+        "1" => [
+            "title" => "Viaje al Centro de la Tierra",
+            "author" => "Julio Verne"
+        ],
+        "2" => [
+            "title" => "El Faro del Fin del Mundo",
+            "author" => "Julio Verne"
+        ],
+        "3" => [
+            "title" => "El Conde de Montecristo",
+            "author" => "Alexander Dumas"
+        ]
+    ];
+
+    $book = $books[$bookId];
+
+    return view("book", ["book" => $book]);
 });
