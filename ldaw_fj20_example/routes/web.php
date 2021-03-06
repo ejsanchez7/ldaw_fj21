@@ -31,7 +31,7 @@ Route::get("test", function(){
 */
 
 //Ruta simple
-Route::get("/", function(){
+Route::get("/books-list", function(){
 
     $books = [
         "1" => [
@@ -55,6 +55,8 @@ Route::get("/", function(){
 Route::view('laravel-landing', "welcome");
 
 //Paso de parámetros en rutas
+
+/*
 Route::get("book/{id?}", function($bookId = 1){
 
     $books = [
@@ -75,4 +77,17 @@ Route::get("book/{id?}", function($bookId = 1){
     $book = $books[$bookId];
 
     return view("book", ["book" => $book]);
-});
+
+//})->where(["id" => "[0-9]+"]);
+})->whereNumber("id");
+*/
+
+//Named routes
+Route::view("books/new","newBook")->name("new-book");
+
+//Rutas que apuntan a controladores
+
+use App\Http\Controllers\BooksController;
+
+Route::get("/", [BooksController::class, "listBooks"]);
+Route::get("book/{id}", [BooksController::class, "bookDetail"])->where(["id" => "[0-9]+"]);

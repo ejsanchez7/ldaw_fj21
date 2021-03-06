@@ -6,6 +6,14 @@
     </head>
     <body>
 
+        <nav>
+            <ul>
+                <li><a href="<?php echo url("/laravel-landing"); ?>">Laravel Landing Page</a></li>
+                {{-- <li><a href="<?php //echo url("/books/new"); ?>">Registrar libro</a></li> --}}
+                <li><a href="<?php echo route("new-book"); ?>">Registrar libro</a></li>
+            </ul>
+        </nav>
+
         <h1>Catálogo de Libros</h1>
 
         <ul>

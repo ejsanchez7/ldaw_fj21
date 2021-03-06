@@ -19,3 +19,24 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("books", function(){
+
+    $books = [
+        "1" => [
+            "title" => "Viaje al Centro de la Tierra",
+            "author" => "Julio Verne"
+        ],
+        "2" => [
+            "title" => "El Faro del Fin del Mundo",
+            "author" => "Julio Verne"
+        ],
+        "3" => [
+            "title" => "El Conde de Montecristo",
+            "author" => "Alexander Dumas"
+        ]
+    ];
+
+    return $books;
+
+});
