@@ -91,3 +91,5 @@ use App\Http\Controllers\BooksController;
 
 Route::get("/", [BooksController::class, "listBooks"]);
 Route::get("book/{id}", [BooksController::class, "bookDetail"])->where(["id" => "[0-9]+"]);
+
+Route::view("list-template","bookListTemplate");

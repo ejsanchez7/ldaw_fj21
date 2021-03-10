@@ -6,26 +6,27 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller{
 
-    private $books = [
-        "1" => [
-            "title" => "Viaje al Centro de la Tierra",
-            "author" => "Julio Verne"
-        ],
-        "2" => [
-            "title" => "El Faro del Fin del Mundo",
-            "author" => "Julio Verne"
-        ],
-        "3" => [
-            "title" => "El Conde de Montecristo",
-            "author" => "Alexander Dumas"
-        ]
-    ];
+    private function readBooks(){
+        //Generar el path al archivo
+        $filePath = storage_path("app/json/books.json");
 
+        //Cargar el archivo
+        if($fileContents = file_get_contents($filePath)){
+            //Transformarlo a una estructura de datos
+            return json_decode($fileContents,true);
+        }
+
+        return [];
+    }
 
     //Catálogo de libros
     public function listBooks(){
 
-        return view("booksList", ["booksList" => $this->books, "param2" => "hola"]);
+        $books = $this->readBooks();
+
+        //dd($books);
+
+        return view("booksList", ["booksList" => $books]);
 
     }
 

@@ -1,32 +1,29 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Catálogo de Libros</title>
-    </head>
-    <body>
+@extends('layouts.main')
 
-        <nav>
-            <ul>
-                <li><a href="<?php echo url("/laravel-landing"); ?>">Laravel Landing Page</a></li>
-                {{-- <li><a href="<?php //echo url("/books/new"); ?>">Registrar libro</a></li> --}}
-                <li><a href="<?php echo route("new-book"); ?>">Registrar libro</a></li>
-            </ul>
-        </nav>
+@section('pageTitle',"Catálogo de Libros")
 
-        <h1>Catálogo de Libros</h1>
+@section('mainContent')
 
-        <ul>
-            <?php foreach($booksList as $book){ ?>
+    <h2>Catálogo de Libros</h2>
 
-                <li>
-                    <strong><?php echo $book["title"]; ?></strong> -
-                    <?php echo $book["author"]; ?>
-                </li>
+    <section class="catalog card-deck justify-content-center">
 
-            <?php } ?>
+        @foreach($booksList as $id => $book)
 
-        </ul>
+            <div class="card">
 
-    </body>
-</html>
+                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgmAa3s6pGdMB9LtGvVjKpTMDaInybN6FeKw&usqp=CAU" alt="Book Image">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ $book["title"] }}</h5>
+                    <p class="card-text">{{ implode(", ",$book["authors"]) }}</p>
+                    <a href="{{ url("book/$id") }}" class="btn btn-primary">Detalle</a>
+                </div>
+
+            </div>
+
+        @endforeach
+
+    </section>
+
+@endsection

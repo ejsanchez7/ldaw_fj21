@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Registro de Libros</title>
-    </head>
-    <body>
+@extends('layouts.main')
 
-        <h1>Nuevo Libro</h1>
+@section('pageTitle',"Nuevo Libro")
 
-    </body>
-</html>
+@section('mainContent')
+
+    <h2>Nuevo Libro</h2>
+
+@endsection
