@@ -1,0 +1,22 @@
+.catalog{
+    padding: 25px;
+}
+
+.catalog .card{
+    color: #000000;
+    text-align: center;
+    min-width: 200px;
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.catalog .card img{
+    margin: 20px auto 0px auto;
+    height: 200px;
+    object-fit: contain;
+}
+
+.catalog .card .btn{
+    background-color: #0f434F;
+    color: #FFFFFF;
+}

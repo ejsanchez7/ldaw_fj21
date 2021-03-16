@@ -68,8 +68,10 @@ nav.navbar-light ul.navbar-nav li.active a.nav-link{
     border-bottom: 5px solid #255C69;
 }
 
-nav.navbar-light ul.navbar-nav li a.nav-link:hover{
+nav.navbar-light ul.navbar-nav li a.nav-link:hover,
+nav.navbar-light ul.navbar-nav li a.nav-link.active{
     background-color: #255C69;
+    color: #FFFFFF;
 }
 
 nav.navbar-light button.navbar-toggler{
@@ -91,34 +93,3 @@ nav.navbar-light ul.navbar-nav li.active a.nav-link{
 main h2{
     text-align: center;
 }
-
-
-/************************
-        CATÁLOGO
-*************************/
-
-.catalog{
-    padding: 25px;
-}
-
-.catalog .card{
-    color: #000000;
-    text-align: center;
-    min-width: 200px;
-    max-width: 200px;
-    margin-bottom: 20px;
-}
-
-.catalog .card img{
-    margin: 20px auto 0px auto;
-}
-
-.catalog .card .btn{
-    background-color: #0f434F;
-    color: #FFFFFF;
-}
-
-
-/************************
-    TERMINA CATÁLOGO
-*************************/

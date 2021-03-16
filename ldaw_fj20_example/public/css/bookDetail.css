@@ -1,0 +1,8 @@
+.book-image img{
+    max-height: 350px;
+}
+
+.book-data ul.list-group li.list-group-item,
+.book-data .book-categories .badge{
+    background-color: #255C69;
+}

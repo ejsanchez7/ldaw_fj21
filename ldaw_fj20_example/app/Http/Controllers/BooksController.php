@@ -33,7 +33,8 @@ class BooksController extends Controller{
     //Detalle de libro
     public function bookDetail($bookId){
 
-        $book = $this->books[$bookId];
+        $booksList = $this->readBooks();
+        $book = isset($booksList[$bookId]) ? $booksList[$bookId] : [];
 
         return view("book", ["book" => $book]);
 

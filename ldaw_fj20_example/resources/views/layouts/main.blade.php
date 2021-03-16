@@ -36,11 +36,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="navbar-nav w-100 justify-content-center">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('/') }}">Catálogo</a>
+                    <li class="nav-item">
+                        <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ url('/') }}">Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('new-book') }}">Nuevo Libro</a>
+                        <a class="nav-link{{ request()->is('books/new') ? ' active' : '' }}" href="{{ route('new-book') }}">Nuevo Libro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Nuevo Préstamo</a>
