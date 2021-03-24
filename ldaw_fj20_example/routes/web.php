@@ -83,13 +83,24 @@ Route::get("book/{id?}", function($bookId = 1){
 */
 
 //Named routes
-Route::view("books/new","newBook")->name("new-book");
+//Route::view("books/new","newBook")->name("new-book");
 
 //Rutas que apuntan a controladores
-
+/*
 use App\Http\Controllers\BooksController;
 
 Route::get("/", [BooksController::class, "listBooks"]);
 Route::get("book/{id}", [BooksController::class, "bookDetail"])->where(["id" => "[0-9]+"]);
 
 Route::view("list-template","bookListTemplate");
+
+
+use App\Http\Controllers\testController;
+
+Route::get("test-route", [testController::class, "testAction"]);
+*/
+
+use App\Http\Controllers\BookController;
+
+Route::get("/",[BookController::class,"index"]);
+Route::resource('books', BookController::class)->except(["index"]);

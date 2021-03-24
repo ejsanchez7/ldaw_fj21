@@ -7,7 +7,7 @@
     <div class="card-body">
         <h5 class="card-title">{{ $title }}</h5>
         <p class="card-text">{{ implode(", ",$authors) }}</p>
-        <a href="{{ url("book/$isbn") }}" class="btn btn-primary">Detalle</a>
+        <a href="{{ route("books.show",["book" => $isbn]) }}" class="btn btn-primary">Detalle</a>
     </div>
 
 </div>

@@ -40,7 +40,7 @@
                         <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ url('/') }}">Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{{ request()->is('books/new') ? ' active' : '' }}" href="{{ route('new-book') }}">Nuevo Libro</a>
+                        <a class="nav-link{{ request()->is('books/create') ? ' active' : '' }}" href="{{ route('books.create') }}">Nuevo Libro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Nuevo Préstamo</a>
