@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-//Importar el cliente de HTTP
-use Illuminate\Support\Facades\Http;
-
-
 class BookController extends Controller{
+
+    //Esto debería moverse al modelo posteriormente
+    private function readBooks(){
+        //Generar el path al archivo
+        $filePath = storage_path("app/json/books.json");
+
+        //Cargar el archivo
+        if($fileContents = file_get_contents($filePath)){
+            //Transformarlo a una estructura de datos
+            return json_decode($fileContents,true);
+        }
+
+        return [];
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -16,25 +27,8 @@ class BookController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
-
-        $response = Http::get(api_route('books'));
-        $books = $response->json();
-
-        //dd($books);
-
-        return view("booksList", ["booksList" => $books]);
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(){
-
-        return view("newBook");
-
+        //Laraverl transforma el arreglo a JSON por defecto y cambia el content type
+        return $this->readBooks();
     }
 
     /**
@@ -54,24 +48,9 @@ class BookController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-
-        $booksList = $this->readBooks();
-        $book = isset($booksList[$id]) ? $booksList[$id] : [];
-
-        return view("book", ["book" => $book]);
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show($id)
     {
-        //
+        echo "show: $id";
     }
 
     /**
