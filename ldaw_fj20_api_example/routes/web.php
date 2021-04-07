@@ -20,3 +20,16 @@ Route::get('/', function () {
 //use App\Http\Controllers\BookController;
 
 //Route::resource("books", BookController::class);
+
+//Ruta para probar la conexión a la base de datos
+Route::get("test-db", function(){
+
+    // Test database connection
+    try {
+        DB::connection()->getPdo();
+        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        die("Could not connect to the database. Please check your configuration. error:" . $e );
+    }
+
+});

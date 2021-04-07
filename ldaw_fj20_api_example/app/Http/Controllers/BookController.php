@@ -2,24 +2,12 @@
 
 namespace App\Http\Controllers;
 
+//Incluir el model
+use App\Models\Book;
+
 use Illuminate\Http\Request;
 
 class BookController extends Controller{
-
-    //Esto debería moverse al modelo posteriormente
-    private function readBooks(){
-        //Generar el path al archivo
-        $filePath = storage_path("app/json/books.json");
-
-        //Cargar el archivo
-        if($fileContents = file_get_contents($filePath)){
-            //Transformarlo a una estructura de datos
-            return json_decode($fileContents,true);
-        }
-
-        return [];
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -28,7 +16,7 @@ class BookController extends Controller{
      */
     public function index(){
         //Laraverl transforma el arreglo a JSON por defecto y cambia el content type
-        return $this->readBooks();
+        return Book::getAllBooks();
     }
 
     /**
@@ -48,9 +36,10 @@ class BookController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        echo "show: $id";
+    public function show($id){
+
+        return Book::getBook($id);
+
     }
 
     /**

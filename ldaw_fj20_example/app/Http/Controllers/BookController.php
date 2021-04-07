@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-//Importar el cliente de HTTP
-use Illuminate\Support\Facades\Http;
+//Importar el model
+use App\Models\Book;
 
 
 class BookController extends Controller{
@@ -17,9 +17,8 @@ class BookController extends Controller{
      */
     public function index(){
 
-        $response = Http::get(api_route('books'));
-        $books = $response->json();
-
+        //llamada al modelo
+        $books = Book::getBooks();
         //dd($books);
 
         return view("booksList", ["booksList" => $books]);
@@ -56,8 +55,7 @@ class BookController extends Controller{
      */
     public function show($id){
 
-        $booksList = $this->readBooks();
-        $book = isset($booksList[$id]) ? $booksList[$id] : [];
+        $book = Book::getBook($id);
 
         return view("book", ["book" => $book]);
 
