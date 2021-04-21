@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-//Incluir el model
-//use App\Models\BookFile as Book;
-use App\Models\BookQueryBuilder as Book;
-//use App\Models\Book as Book;
-
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
-class BookController extends Controller{
-
+class LoanController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        //Laraverl transforma el arreglo a JSON por defecto y cambia el content type
-        return Book::getAllBooks();
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -35,23 +41,33 @@ class BookController extends Controller{
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book){
+    public function show(Loan $loan)
+    {
+        //
+    }
 
-        return Book::getBook($id);
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Loan  $loan
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Loan $loan)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Loan $loan)
     {
         //
     }
@@ -59,10 +75,10 @@ class BookController extends Controller{
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Loan $loan)
     {
         //
     }

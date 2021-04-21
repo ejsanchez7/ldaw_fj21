@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-//Incluir el model
-//use App\Models\BookFile as Book;
-use App\Models\BookQueryBuilder as Book;
-//use App\Models\Book as Book;
-
+use App\Models\Language;
 use Illuminate\Http\Request;
 
-class BookController extends Controller{
-
+class LanguageController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        //Laraverl transforma el arreglo a JSON por defecto y cambia el content type
-        return Book::getAllBooks();
+        return Language::find(1)->books;
     }
 
     /**
@@ -35,23 +30,22 @@ class BookController extends Controller{
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book){
-
-        return Book::getBook($id);
-
+    public function show(Language $language)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Language $language)
     {
         //
     }
@@ -59,10 +53,10 @@ class BookController extends Controller{
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Language $language)
     {
         //
     }
