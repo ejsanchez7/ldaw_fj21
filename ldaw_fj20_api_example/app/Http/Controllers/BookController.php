@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 //Incluir el model
 //use App\Models\BookFile as Book;
-use App\Models\BookQueryBuilder as Book;
-//use App\Models\Book as Book;
+//use App\Models\BookQueryBuilder as Book;
+use App\Models\Book;
 
 use Illuminate\Http\Request;
 

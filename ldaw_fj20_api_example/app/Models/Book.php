@@ -9,34 +9,65 @@ class Book extends Model{
 
     use HasFactory;
 
-    //Esto debería moverse al modelo posteriormente
-    private static function readBooks(){
-        //Generar el path al archivo
-        $filePath = storage_path("app/json/books.json");
+    /*******************
+        CONFIGURACIÓN
+    ********************/
 
-        //Cargar el archivo
-        if($fileContents = file_get_contents($filePath)){
-            //Transformarlo a una estructura de datos
-            return json_decode($fileContents,true);
-        }
+    //Desactivar los timestamps
+    //public $timestamps = false;
 
-        return [];
+    /******************
+        ASOCIACIONES
+    *******************/
+
+    //Un libro puede pertenecer a muchos autores
+    public function authors(){
+        return $this->belongsToMany(Author::class,"authors_books");
     }
 
-    //Obtiene el listado de libros y los devuelve como un arreglo arreglo
+    //Un libro pertenece a una editorial
+    public function publisher(){
+        return $this->belongsTo(Publisher::class);
+    }
+
+    //Un libro está escrito en a un idioma
+    public function language(){
+        return $this->belongsTo(Language::class);
+    }
+
+
+    /*************
+        MÉTODOS
+    **************/
+
+
+    /***********************
+        MÉTODOS ESTÁTICOS
+    ************************/
+
     public static function getAllBooks(){
 
-        return self::readBooks();
+        $books = self::all();
 
-    }
+        $result = [];
 
-    //Encuentra un libro por ID
-    public static function getBook($id){
+        foreach($books as $book){
 
-        $books = self::readBooks();
+            $bookArray = [
+                "isbn" => $book->isbn,
+                "title" => $book->title,
+                "authors" => []
+            ];
 
-        return isset($books[$id]) ? $books[$id] : null;
+            foreach($book->authors as $author){
+                $bookArray["authors"][] = $author->getFullName();
+            }
 
+            $result[$book->isbn] = $bookArray;
+
+        }
+
+        return $result;
     }
 
 }
