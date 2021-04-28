@@ -38,9 +38,26 @@ class BookController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book){
+    public function show($id){
 
-        return Book::getBook($id);
+        $book = Book::where("isbn",$id)->first();
+
+        $output = [
+            "isbn" => $book->isbn,
+            "title" => $book->title,
+            "authors" => [],
+            "categories" => [],
+            "summary" => $book->summary,
+            "edition" => $book->edition,
+            "publisher" => $book->publisher->name,
+            "language" => $book->language->name
+        ];
+
+        foreach($book->authors as $author){
+            $output["authors"][] = $author->getFullName();
+        }
+
+        return $output;
 
     }
 

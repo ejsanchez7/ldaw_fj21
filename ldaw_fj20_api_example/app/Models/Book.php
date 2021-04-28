@@ -47,7 +47,10 @@ class Book extends Model{
 
     public static function getAllBooks(){
 
-        $books = self::all();
+        //$books = self::all();
+        $books = self::with("authors:first_name,last_name,second_last_name")
+            ->orderBy("title","asc")
+            ->get();
 
         $result = [];
 
