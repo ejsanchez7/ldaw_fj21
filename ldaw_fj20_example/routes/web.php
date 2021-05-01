@@ -103,4 +103,25 @@ Route::get("test-route", [testController::class, "testAction"]);
 use App\Http\Controllers\BookController;
 
 Route::get("/",[BookController::class,"index"]);
-Route::resource('books', BookController::class)->except(["index"]);
+Route::resource('books', BookController::class)->except(["index"])->middleware('auth');
+
+// NOTE:: Ruta y funcionalidad para el logout
+
+use App\Model\User;
+use Illuminate\Support\Facades\Auth;
+
+Route::get("/logout",function(Request $request){
+
+    if(auth()->user()->revokeToken()){
+        //Hacer el logout
+        Auth::logout();
+        //Invalidar la sesión
+        session()->invalidate();
+        //Regenerar el token de la sesión
+        session()->regenerateToken();
+
+        return redirect('/login');
+
+    }
+
+})->name("logout");

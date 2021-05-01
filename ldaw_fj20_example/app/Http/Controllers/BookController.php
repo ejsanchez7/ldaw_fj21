@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 //Importar el model
 use App\Models\Book;
 
+//Autenticación
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller{
 

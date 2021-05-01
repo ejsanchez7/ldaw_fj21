@@ -39,15 +39,29 @@
                     <li class="nav-item">
                         <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ url('/') }}">Catálogo</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link{{ request()->is('books/create') ? ' active' : '' }}" href="{{ route('books.create') }}">Nuevo Libro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Nuevo Préstamo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mis Préstamos</a>
-                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link{{ request()->is('books/create') ? ' active' : '' }}" href="{{ route('books.create') }}">Nuevo Libro</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nuevo Préstamo</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mis Préstamos</a>
+                        </li>
+                    @endauth
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route("login")}}">Login</a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route("logout")}}">Logout</a>
+                        </li>
+                    @endauth
                 </ul>
 
             </div>

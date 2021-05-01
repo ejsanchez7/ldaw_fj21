@@ -2,42 +2,102 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+//NOTE: Debe implementar esta interfaz para que se pueda integrar con el sistema
+//de autenticación de laravel
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
+//Cliente HTTP de Laravel para solicitar datos a la API
+use Illuminate\Support\Facades\Http;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+class User implements Authenticatable{
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    /*
+    NOTE: Propiedades que necesitamos del usuario
+    */
+    public $email = null;
+    public $name = null;
+    public $role = null;
+    public $privileges = [];
+    public $token = null;
+
+    /*********************************************
+    NOTE: Métodos desarrollados para este modelo
+    **********************************************/
+
+    public function revokeToken(){
+
+        //obtener los datos del usuario desde la API
+        $response = HTTP::withToken($this->token)
+                        ->timeout(env("API_TIMEOUT"))
+                        ->get(api_route("logout"));
+
+        //dd($response->body());
+
+        return $response->successful();
+
+    }
+
+
+    /*****************************************************
+    NOTE: Métodos estáticos desarrollados para este modelo
+    ******************************************************/
+
+    //Solicita el usuario logueado a la API usando el token registrado en la sesión
+    public static function requestUser($token){
+
+        //obtener los datos del usuario desde la API
+        $response = HTTP::withToken($token)
+                        ->timeout(env("API_TIMEOUT"))
+                        ->get(api_route("user"));
+
+        if($response->successful()){
+            //Crear la instancia del usuario y devolverla
+            $userData = $response->json();
+
+            $user = new User;
+
+            $user->email = $userData["email"];
+            $user->name = $userData["name"];
+            $user->role = "user";
+            $user->privileges = ["a","b","c"];
+            $user->token = $token;
+
+            return $user;
+
+        }
+
+        return null;
+
+    }
+
+
+    /*********************************************************************
+    NOTE: métodos que se tienen que implementar debido a "Authenticatable"
+    **********************************************************************/
+
+    public function getAuthIdentifierName(){
+        return "token";
+    }
+
+    public function getAuthIdentifier(){
+        return $this->token;
+    }
+
+    public function getAuthPassword(){
+        return $this->token;
+    }
+
+    public function getRememberToken(){
+        return null;
+    }
+
+    public function setRememberToken($value){
+
+    }
+
+    public function getRememberTokenName(){
+        return null;
+    }
+
 }

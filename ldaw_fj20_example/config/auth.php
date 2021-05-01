@@ -67,7 +67,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'ldaw_api',
             'model' => App\Models\User::class,
         ],
 
