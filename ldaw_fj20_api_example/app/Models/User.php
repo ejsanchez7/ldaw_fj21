@@ -43,4 +43,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /******************
+        ASOCIACIONES
+    *******************/
+
+    //Un usuario puede tener solo un rol
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    /*************************
+        MÉTODOS DE LA CLASE
+    *************************/
+
+    public function getPrivilegesList(){
+
+        $privileges = $this->role->privileges->pluck("name");
+
+        return $privileges;
+
+    }
+
 }

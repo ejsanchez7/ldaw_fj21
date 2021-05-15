@@ -51,6 +51,8 @@ class User implements Authenticatable{
                         ->timeout(env("API_TIMEOUT"))
                         ->get(api_route("user"));
 
+        //dd($response->body());
+
         if($response->successful()){
             //Crear la instancia del usuario y devolverla
             $userData = $response->json();
@@ -59,8 +61,8 @@ class User implements Authenticatable{
 
             $user->email = $userData["email"];
             $user->name = $userData["name"];
-            $user->role = "user";
-            $user->privileges = ["a","b","c"];
+            $user->role = $userData["role"];
+            $user->privileges = $userData["privileges"];
             $user->token = $token;
 
             return $user;

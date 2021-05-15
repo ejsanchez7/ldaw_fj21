@@ -18,9 +18,12 @@ class DatabaseSeeder extends Seeder
             PublisherSeeder::class,
             CountrySeeder::class,
             LanguageSeeder::class,
+            PrivilegesSeeder::class,
             //Tablas con llaves foráneas
             BookSeeder::class,
             AuthorSeeder::class,
+            RolesSeeder::class,
+            UserSeeder::class,
             //Tablas pivote
             AuthorBookSeeder::class,
         ]);

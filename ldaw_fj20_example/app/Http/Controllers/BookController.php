@@ -20,6 +20,8 @@ class BookController extends Controller{
      */
     public function index(){
 
+        //dd(auth()->user());
+
         //llamada al modelo
         $books = Book::getBooks();
         //dd($books);
