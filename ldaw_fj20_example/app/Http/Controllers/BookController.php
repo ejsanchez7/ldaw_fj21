@@ -10,6 +10,9 @@ use App\Models\Book;
 //Autenticación
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Gate;
+
+
 
 class BookController extends Controller{
 
@@ -21,6 +24,7 @@ class BookController extends Controller{
     public function index(){
 
         //dd(auth()->user());
+        $this->authorize("viewAny",Book::class);
 
         //llamada al modelo
         $books = Book::getBooks();
@@ -36,6 +40,14 @@ class BookController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create(){
+
+        //$this->authorize("create",Book::class);
+
+        $response = Gate::inspect("create",Book::class);
+
+        if (!$response->allowed()) {
+            return redirect("/");
+        }
 
         return view("newBook");
 
@@ -59,6 +71,8 @@ class BookController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function show($id){
+
+        $this->authorize("view",Book::class);
 
         $book = Book::getBook($id);
 

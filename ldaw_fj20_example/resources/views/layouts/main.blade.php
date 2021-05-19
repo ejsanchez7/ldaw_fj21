@@ -39,11 +39,12 @@
                     <li class="nav-item">
                         <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ url('/') }}">Catálogo</a>
                     </li>
-                    @auth
+                    @can("create",App\Models\Book::class)
                         <li class="nav-item">
                             <a class="nav-link{{ request()->is('books/create') ? ' active' : '' }}" href="{{ route('books.create') }}">Nuevo Libro</a>
                         </li>
-
+                    @endcan
+                    @auth
                         <li class="nav-item">
                             <a class="nav-link" href="#">Nuevo Préstamo</a>
                         </li>

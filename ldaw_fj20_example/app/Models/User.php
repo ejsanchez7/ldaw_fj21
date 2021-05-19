@@ -38,6 +38,22 @@ class User implements Authenticatable{
 
     }
 
+    public function hasPrivilege($privilege){
+
+        if(!empty($this->privileges)){
+
+            return in_array($privilege,$this->privileges);
+
+        }
+
+        return false;
+
+    }
+
+    public function isAdmin(){
+        return $this->role === "admin";
+    }
+
 
     /*****************************************************
     NOTE: Métodos estáticos desarrollados para este modelo
